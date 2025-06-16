@@ -10,6 +10,8 @@ touch server.js
 <!-- install express -->
 npm install express -y
 
+<!-- install crypto-js -->
+npm install crypto-js
 
 
 
@@ -21,3 +23,8 @@ docker container run -itd --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root 
 
 <!-- docker container execution -->
 docker container exec -it mysql bash
+
+<!-- mysql2 pool -->
+link : https://sidorares.github.io/node-mysql2/docs#using-connection-pools
+npm install mysql2
+
