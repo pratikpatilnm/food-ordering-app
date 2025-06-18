@@ -1,7 +1,8 @@
 const express = require('express')
 const db = require('../database')
-const crypto = require('crypto-js')
+// const crypto = require('crypto-js')
 const utils = require('../utils')
+const mailer = require('../mailer')
 
 const router = express.Router()
 
@@ -25,23 +26,50 @@ router.post('/register', (request, response) => {
             insert into users (first_name, last_name, email, password) values (?,?,?,?);
         `
         // encrypt the password
-        encryptedPassword = String(crypto.SHA256(password))
+        // encryptedPassword = String(crypto.SHA256(password))
 
-        db.pool.execute(statement, [firstName, lastName, email, encryptedPassword],
+        db.pool.execute(statement, [firstName, lastName, email, utils.encryptedPassword(password)],
         (error, result) => {
-            // if (error) {
-            //     // something gone wrong
-            //     console.log(`error: `, error)
-            //     response.send(error)
-            // } else {
-            //     console.log(`status: `, result)
-            //     response.send({status: 'success', data: 'ok'})
-            // }
+
+            // send the result to the client
+            mailer.sendEmail(email, 'Welcome to food ordering application', `
+                <h1> Welcome </h1>
+                </br>
+                <div>hello ${firstName}</div>
+                </br>
+                <div>Thank you !</div>
+                <div><>
+                `)
 
             // send the result to the client
             response.send(utils.createResult(error, result))
         }
         )
+
+})
+
+router.post('/login', (request, response) => {
+    const {email, password} = request.body
+
+    const statement = `
+        select id, first_name, last_name from users where email=? and password=?;
+    `
+    // execute the query
+    db.pool.query(statement,
+        [email, utils.encryptedPassword(password)],
+        (error, users) => {
+            if (error) {
+                // error while executing sql statement
+                response.send(utils.createError(error))
+            } else {
+                if (users.length == 0) {
+                    response.send(utils.createError(`user dosenot exist`))
+                } else {
+                    response.send(utils.createSuccess(users[0])) 
+                }
+            }
+        }
+    )
 
 })
 

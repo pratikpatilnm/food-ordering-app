@@ -13,6 +13,9 @@ npm install express -y
 <!-- install crypto-js -->
 npm install crypto-js
 
+<!-- install nodemailer -->
+npm install nodemailer
+
 
 
 
@@ -23,6 +26,12 @@ docker container run -itd --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root 
 
 <!-- docker container execution -->
 docker container exec -it mysql bash
+
+<!-- start mysql inside container -->
+mysql -u root -p
+
+<!-- to start stopped container -->
+docker start mysql
 
 <!-- mysql2 pool -->
 link : https://sidorares.github.io/node-mysql2/docs#using-connection-pools

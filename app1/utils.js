@@ -1,3 +1,5 @@
+const crypto = require('crypto-js')
+
 function createResult(error, data){
     if (error) {
         // sending error response
@@ -20,8 +22,13 @@ function createSuccess(data){
     }
 }
 
+function encryptedPassword(password){
+    return String(crypto.SHA256(password))
+}
+
 module.exports = {
     createResult,
     createError,
-    createSuccess
+    createSuccess,
+    encryptedPassword
 }
