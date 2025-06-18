@@ -38,7 +38,7 @@ router.post('/register', (request, response) => {
                 <div>hello ${firstName}</div>
                 </br>
                 <div>Thank you !</div>
-                <div><>
+                <div>Admin.</div>
                 `)
 
             // send the result to the client
@@ -71,6 +71,57 @@ router.post('/login', (request, response) => {
         }
     )
 
+})
+
+
+router.post('/forgot-password', (request, response) => {
+    const {email} = request.body
+
+    const statement = `
+        select id, first_name, last_name from users where email=?;
+    `
+    // execute the query
+    db.pool.query(statement,
+        [email],
+        (error, users) => {
+            if (error) {
+                // error while executing sql statement
+                response.send(utils.createError(error))
+            } else {
+                if (users.length == 0) {
+                    response.send(utils.createError(`user dosenot exist`))
+                } else {
+                    // user exists
+                    const user = users[0]
+
+                    // send email
+                    mailer.sendEmail(email,
+                        `Reset Password`,
+                        `
+                        <h1>Reset Password</h1>
+                        <br/>
+                        <div>Dear ${user['first_name']},</div>
+                        <div>Please click <a href="http://locolhost:5173/reset-password">here</a> to reset the password.</div>
+                        <div>Thank you !</div>
+                        <div>Admin.</div>
+                        `)
+                    // send response
+                    response.send(utils.createSuccess('Please check your email'))
+                }
+            }
+        }
+    )
+})
+
+router.put('/reset-password/', (request, response) => {
+    const {email, password} = request.body
+
+    // SQL statement
+    statement = `UPDATE users SET password = ? where email = ?;`
+
+    db.pool.execute(statement, [utils.encryptedPassword(password), email], (error, result) => {
+        response.send(utils.createResult(error, result))
+    })
 })
 
 
