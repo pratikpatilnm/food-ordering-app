@@ -16,7 +16,8 @@ npm install crypto-js
 <!-- install nodemailer -->
 npm install nodemailer
 
-
+<!-- install jsonwebtoken -->
+npm install jsonwebtoken
 
 
 <!-- database -->
@@ -24,16 +25,24 @@ npm install nodemailer
 <!-- docker container for sql -->
 docker container run -itd --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root mysql
 
-<!-- docker container execution -->
-docker container exec -it mysql bash
-
-<!-- start mysql inside container -->
-mysql -u root -p
-
-<!-- to start stopped container -->
-docker start mysql
-
 <!-- mysql2 pool -->
 link : https://sidorares.github.io/node-mysql2/docs#using-connection-pools
 npm install mysql2
 
+<!-- docker container execution -->
+docker container exec -it mysql bash
+
+<!-- to start stopped container -->
+start mysql
+
+<!-- start mysql inside container -->
+mysql -u root -p
+
+<!-- use database -->
+use food_ordering_app_db;
+
+<!-- show tables -->
+show tables;
+
+<!-- show users table -->
+SELECT * from users;
