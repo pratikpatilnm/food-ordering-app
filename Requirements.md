@@ -14,13 +14,21 @@
 
 # Requirements
 - user
-    - POST /user/register : DONE
-    - POST /user/login : DONE
-- profile
-    - GET /user/profile
-    - PUT /user/profile
-- POST /user/forgot-password : DONE
-- PUT /user/reset-password : DONE
+    - POST /user/register           : DONE
+    - POST /user/login              : DONE
+    - profile
+        - GET /user/profile         : DONE
+        - PUT /user/profile         : DONE
+        - PUT /user/profile-image   : DONE
+    - POST /user/forgot-password    : DONE
+    - PUT /user/reset-password      : DONE
+
+- address
+    - POST /address/        : DONE
+    - GET /address/         : DONE
+    - PUT /address/:id      : DONE
+    - DELETE /address/:id   : DONE
+
 
 # npm modules
 - express
@@ -33,3 +41,7 @@
     - used to send emails
 - jesonwebtokens
     - use to authorize the user
+- dotenv
+    - used to load the configuration from enviornment variable files
+- multer
+    - used to upload a file on the server
