@@ -7,8 +7,8 @@ use food_ordering_app_db
 -- user table
 create table users(
     id integer primary key auto_increment,
-    first_name varchar(30),
-    last_name varchar(30),
+    firstName varchar(30),
+    lastName varchar(30),
     email varchar(50),
     password varchar(100),
     createdTimestamp timestamp default CURRENT_TIMESTAMP
