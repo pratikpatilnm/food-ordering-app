@@ -3,6 +3,13 @@ const express = require('express')
 const jwt = require('jsonwebtoken')
 const config = require('./config')
 const utils = require('./utils')
+// const dotenv = require('dotenv')
+
+
+// // load the configuration from .env file
+// dotenv.config()
+// console.log(process.env['DUMMY_KEY'])
+
 // create app
 const app = express()
 // set PORT
@@ -60,8 +67,10 @@ app.use((request, response, next) => {
 
 // add the routes
 const userRouter = require('./routes/users')
+const userAddress = require('./routes/address')
 
 app.use('/user', userRouter)
+app.use('/address', userAddress)
 
 
 

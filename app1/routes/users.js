@@ -1,6 +1,8 @@
 const express = require('express')
 // const crypto = require('crypto-js')
 const jwt = require('jsonwebtoken')
+const multer = require ('multer')
+
 
 const db = require('../database')
 const utils = require('../utils')
@@ -8,6 +10,8 @@ const mailer = require('../mailer')
 const config = require('../config')
 
 const router = express.Router()
+
+const upload = multer({dest: 'files'})
 
 // test API
 router.get('/test', (request, response) => {
@@ -171,5 +175,70 @@ router.get('/profile', (request, response) => {
 
 
 })
+
+// update profile
+router.put('/profile', (request, response) => {
+    const {firstName, lastName, password} = request.body
+    // create sql statement
+    const statement = `
+            UPDATE users set firstName = ?, lastName = ?, password = ? WHERE  id = ?;
+        `
+
+    // encrypt the password
+    // encryptedPassword = String(crypto.SHA256(password))
+
+    db.pool.execute(statement, [firstName, lastName, utils.encryptedPassword(password), request['userInfo']['id'],],
+        (error, result) => {
+
+            // send the result to the client
+            // mailer.sendEmail(email, 'Welcome to food ordering application', `
+            //     <h1> Welcome </h1>
+            //     </br>
+            //     <div>hello ${firstName}</div>
+            //     </br>
+            //     <div>Thank you !</div>
+            //     <div>Admin.</div>
+            //     `)
+
+            // send the result to the client
+            response.send(utils.createResult(error, result))
+        }
+    )
+})
+
+// update the profile image
+router.put('/profile-image',upload.single('photo'), (request, response) => {
+    console.log(request.file)
+
+    const {profileImage} = request.body
+    // create sql statement
+    const statement = `
+            UPDATE users set profileImage = ? WHERE  id = ?;
+        `
+
+    // encrypt the password
+    // encryptedPassword = String(crypto.SHA256(password))
+
+    db.pool.execute(statement, [request.file.fieldname, request['userInfo']['id']],
+        (error, result) => {
+
+            // send the result to the client
+            // mailer.sendEmail(email, 'Welcome to food ordering application', `
+            //     <h1> Welcome </h1>
+            //     </br>
+            //     <div>hello ${firstName}</div>
+            //     </br>
+            //     <div>Thank you !</div>
+            //     <div>Admin.</div>
+            //     `)
+
+            // send the result to the client
+            response.send(utils.createResult(error, result))
+        }
+    )
+})
+
+
+
 
 module.exports = router
