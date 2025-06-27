@@ -6,7 +6,7 @@
 - address           :DONE
 - categories        :DONE
 - food-item         :DONE
-- cart              
+- cart              :DONE
 - order
 - offers
 - help
