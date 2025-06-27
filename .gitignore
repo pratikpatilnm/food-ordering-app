@@ -52,3 +52,6 @@ Thumbs.db
 public/uploads/
 build/
 dist/
+
+# temp files
+files

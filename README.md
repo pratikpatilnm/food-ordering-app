@@ -29,11 +29,11 @@ docker container run -itd --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root 
 link : https://sidorares.github.io/node-mysql2/docs#using-connection-pools
 npm install mysql2
 
+<!-- to start stopped container -->
+docker start mysql
+
 <!-- docker container execution -->
 docker container exec -it mysql bash
-
-<!-- to start stopped container -->
-start mysql
 
 <!-- start mysql inside container -->
 mysql -u root -p
