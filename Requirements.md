@@ -42,6 +42,11 @@
     - PUT /food-item/:id             : DONE
     - DELETE /food-item/:id          : DONE
 
+- cart
+    - POST /cart/               : DONE
+    - GET /cart/                : DONE
+    - PUT /cart/:id             : DONE
+    - DELETE /cart/:id          : DONE
 # npm modules
 - express
     - used to implement REST APIs.
