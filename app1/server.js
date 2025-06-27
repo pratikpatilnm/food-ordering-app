@@ -68,11 +68,13 @@ app.use((request, response, next) => {
 // add the routes
 const userRouter = require('./routes/users')
 const userAddress = require('./routes/address')
+const categoryRouter = require('./routes/categories')
+const foodItemRouter = require('./routes/foodItems') 
 
 app.use('/user', userRouter)
 app.use('/address', userAddress)
-
-
+app.use('/category', categoryRouter)
+app.use('/food-item', foodItemRouter)
 
 
 // start the server

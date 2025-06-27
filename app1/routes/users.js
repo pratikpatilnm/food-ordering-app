@@ -15,7 +15,17 @@ const upload = multer({dest: 'files'})
 
 // test API
 router.get('/test', (request, response) => {
-    response.send(`Server test successfull`);
+    // Try a simple query to test DB connection
+   db.pool.query('SHOW TABLES', (error, results) => {
+        if (error) {
+            console.error('Database connection failed:', error);
+            return response.status(500).send('Database connection failed');
+        }
+        response.send({
+            message: 'Server and database test successful',
+            tables: results
+        });
+    });
 })
 
 // register

@@ -2,12 +2,13 @@
 
 ## entities (module)
 
-- users
-- dishhes
-- cart
+- users             :DONE
+- address           :DONE
+- categories        :DONE
+- food-item         :DONE
+- cart              
 - order
 - offers
-- categories
 - help
 - chat
 - payment
@@ -29,6 +30,17 @@
     - PUT /address/:id      : DONE
     - DELETE /address/:id   : DONE
 
+- category
+    - POST /category/           : DONE
+    - GET /category/            : DONE
+    - PUT /category/:id         : DONE
+    - DELETE /category/:id      : DONE
+
+- food items
+    - POST /food-item/               : DONE
+    - GET /food-item/                : DONE
+    - PUT /food-item/:id             : DONE
+    - DELETE /food-item/:id          : DONE
 
 # npm modules
 - express
