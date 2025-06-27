@@ -70,12 +70,13 @@ const userRouter = require('./routes/users')
 const userAddress = require('./routes/address')
 const categoryRouter = require('./routes/categories')
 const foodItemRouter = require('./routes/foodItems') 
+const cartRouter = require('./routes/cart')
 
 app.use('/user', userRouter)
 app.use('/address', userAddress)
 app.use('/category', categoryRouter)
 app.use('/food-item', foodItemRouter)
-
+app.use('/cart', cartRouter)
 
 // start the server
 app.listen(PORT, '0.0.0.0', () => {
